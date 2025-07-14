@@ -1,266 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Heartfelt Apology</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        .heart {
-            animation: heartbeat 1.5s ease-in-out infinite both;
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .message {
-            animation: fadeIn 1.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .btn-hover {
-            transition: all 0.3s ease;
-        }
-        
-        .btn-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            opacity: 0;
-        }
-        
-        .flower {
-            position: absolute;
-            opacity: 0;
-            animation: fall linear forwards;
-        }
-        
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Full Page YouTube Loop</title>
+  <style>
+    /* Reset margin/padding */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    /* Container chiếm toàn bộ khung hình */
+    .video-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+    }
+    /* Iframe full kích thước */
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* tránh tương tác */
+    }
+  </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4">
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none" id="animation-container"></div>
-    
-    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl overflow-hidden z-10 transform transition-all duration-500 hover:shadow-2xl">
-        <div class="relative h-48 bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
-            <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-            <div class="relative z-10 text-center px-4">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-2 message">I'm Sorry</h1>
-                <div class="heart text-4xl text-white">
-                    <i class="fas fa-heart"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="p-8">
-            <div class="flex justify-center mb-8">
-                <img src="https://i.ibb.co/R4jyhVVw/489791918-4029820324004943-672845993300674976-n.jpg" 
-                     alt="Cô gái xinh đẹp" 
-                     class="w-32 h-32 rounded-full border-4 border-pink-200 object-cover shadow-lg floating">
-            </div>
-            
-            <div class="space-y-6 text-center">
-                <h2 class="text-2xl font-semibold text-gray-800">Gửi cô gái xinh đẹp nhất đời anh,</h2>
-                
-                <div class="bg-pink-50 rounded-lg p-4 border-l-4 border-pink-400 message">
-                    <p class="text-gray-700">Anh biết anh đã sai và thật sự rất xin lỗi vì đã làm tổn thương em. Em là tất cả đối với anh, và nhìn thấy em buồn làm trái tim anh tan nát.</p>
-                </div>
-                
-                <div class="bg-rose-50 rounded-lg p-4 border-l-4 border-rose-400 message" style="animation-delay: 0.3s;">
-                    <p class="text-gray-700">Anh hứa sẽ suy nghĩ chín chắn hơn, lắng nghe em nhiều hơn và trân trọng từng khoảnh khắc bên em.</p>
-                </div>
-                
-                <div class="bg-pink-50 rounded-lg p-4 border-l-4 border-pink-400 message" style="animation-delay: 0.6s;">
-                    <p class="text-gray-700">Nụ cười của em thắp sáng cả thế giới của anh, và anh sẽ làm bất cứ điều gì để được thấy nụ cười đó thêm lần nữa.</p>
-                </div>
-                
-                <div class="mt-8">
-                    <button id="forgive-btn" class="btn-hover bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300">
-                        Em sẽ tha thứ cho anh chứ?
-                        <i class="fas fa-heart ml-2"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-    </div>
-    
-    <div class="mt-8 text-center text-gray-600">
-        <p>Made with <i class="fas fa-heart text-red-500"></i> for you</p>
-    </div>
-    
-    <div id="success-message" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl p-8 max-w-md mx-4 text-center transform scale-0 transition-transform duration-300">
-            <div class="text-6xl text-pink-500 mb-4">
-                <i class="fas fa-heart"></i>
-            </div>
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Cảm ơn em!</h2>
-            <p class="text-gray-600 mb-6">Anh hứa sẽ bù đắp cho em. Em là điều tuyệt nhất từng đến với anh.</p>
-            <button id="close-btn" class="bg-pink-500 text-white px-6 py-2 rounded-full hover:bg-pink-600 transition">Đóng</button>
-        </div>
-    </div>
-    
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create floating hearts in background
-            const container = document.getElementById('animation-container');
-            
-            function createFloatingHearts() {
-                const heart = document.createElement('div');
-                heart.innerHTML = '<i class="fas fa-heart text-pink-200"></i>';
-                heart.className = 'flower text-xl absolute';
-                
-                const startPosX = Math.random() * window.innerWidth;
-                const delay = Math.random() * 5;
-                const duration = 5 + Math.random() * 10;
-                const size = 0.5 + Math.random() * 1.5;
-                
-                heart.style.left = startPosX + 'px';
-                heart.style.top = '-30px';
-                heart.style.opacity = '0.7';
-                heart.style.fontSize = size + 'rem';
-                heart.style.animationDuration = duration + 's';
-                heart.style.animationDelay = delay + 's';
-                
-                container.appendChild(heart);
-                
-                // Remove heart after animation completes
-                setTimeout(() => {
-                    heart.remove();
-                }, (duration + delay) * 1000);
-            }
-            
-            // Create initial hearts
-            for (let i = 0; i < 10; i++) {
-                createFloatingHearts();
-            }
-            
-            // Keep creating hearts periodically
-            setInterval(createFloatingHearts, 1000);
-            
-            // Forgive button click handler
-            const forgiveBtn = document.getElementById('forgive-btn');
-            const successMessage = document.getElementById('success-message');
-            const closeBtn = document.getElementById('close-btn');
-            
-            forgiveBtn.addEventListener('click', function() {
-                // Create confetti effect
-                createConfetti();
-                
-                // Show success message
-                successMessage.classList.remove('hidden');
-                setTimeout(() => {
-                    document.querySelector('#success-message div').classList.add('scale-100');
-                }, 100);
-                
-                // Change button text and disable it
-                forgiveBtn.innerHTML = 'Thank you! <i class="fas fa-heart ml-2"></i>';
-                forgiveBtn.classList.remove('from-pink-500', 'to-rose-500');
-                forgiveBtn.classList.add('from-green-400', 'to-emerald-500');
-                forgiveBtn.disabled = true;
-            });
-            
-            closeBtn.addEventListener('click', function() {
-                document.querySelector('#success-message div').classList.remove('scale-100');
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                }, 300);
-            });
-            
-            // Create confetti effect
-            function createConfetti() {
-                const colors = ['#f87171', '#60a5fa', '#34d399', '#fbbf24', '#a78bfa', '#f472b6'];
-                
-                for (let i = 0; i < 100; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    const size = Math.random() * 10 + 5;
-                    const shape = Math.random() > 0.5 ? '50%' : '0';
-                    
-                    confetti.style.backgroundColor = color;
-                    confetti.style.width = size + 'px';
-                    confetti.style.height = size + 'px';
-                    confetti.style.borderRadius = shape;
-                    confetti.style.left = Math.random() * window.innerWidth + 'px';
-                    confetti.style.top = '-20px';
-                    confetti.style.opacity = '1';
-                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-                    
-                    container.appendChild(confetti);
-                    
-                    // Animation
-                    const animationDuration = Math.random() * 3 + 2;
-                    
-                    confetti.style.transition = `all ${animationDuration}s ease-out`;
-                    
-                    setTimeout(() => {
-                        confetti.style.top = window.innerHeight + 'px';
-                        confetti.style.opacity = '0';
-                        confetti.style.transform = `rotate(${Math.random() * 360}deg) translateX(${(Math.random() - 0.5) * 200}px)`;
-                    }, 10);
-                    
-                    // Remove confetti after animation
-                    setTimeout(() => {
-                        confetti.remove();
-                    }, animationDuration * 1000);
-                }
-            }
-            
-            // Add floating effect to all message boxes on hover
-            const messages = document.querySelectorAll('.message');
-            messages.forEach(message => {
-                message.addEventListener('mouseenter', function() {
-                    this.classList.add('transform', 'scale-105', 'transition', 'duration-300');
-                });
-                
-                message.addEventListener('mouseleave', function() {
-                    this.classList.remove('transform', 'scale-105');
-                });
-            });
-        });
-    </script>
+<body>
+  <div class="video-container">
+    <iframe
+      src="https://www.youtube.com/embed/LLIi0NaKnEs?autoplay=1&mute=1&loop=1&playlist=LLIi0NaKnEs&controls=0&modestbranding=1&rel=0"
+      frameborder="0"
+      allow="autoplay; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
 </body>
 </html>
